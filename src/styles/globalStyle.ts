@@ -95,7 +95,7 @@ export const globalStyle = css`
     line-height: 1.5;
     color: ${color['white-color']};
 
-    background-color: ${color['black-color-ligth']};
+    background-color: ${color['gray-color']};
 
     user-select: none;
     -webkit-font-smoothing: antialiased;
@@ -150,7 +150,7 @@ export const globalStyle = css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color['gray-color']};
+    background: ${color['blue-color']};
     background-clip: padding-box;
     border-radius: 5px;
   }
