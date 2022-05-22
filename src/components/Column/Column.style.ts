@@ -4,6 +4,7 @@ import dote from '@assets/img/dote.svg';
 
 export const boardWrap = css`
   position: relative;
+
   max-width: 353px;
   border-radius: 6px;
   padding: 8px;
@@ -14,6 +15,9 @@ export const boardWrap = css`
 
 export const columnList = css`
   position: relative;
+
+  min-width: 353px;
+
   list-style: none;
 `;
 
@@ -22,6 +26,8 @@ export const titleWrap = css`
   justify-content: space-between;
 
   color: ${color['white-color']};
+
+  cursor: grab;
 `;
 
 export const title = css`
@@ -121,4 +127,25 @@ export const taskCountWrap = css`
 
 export const taskCount = css`
   background-color: ${color['gray-color-light-X3']};
+`;
+
+export const columnTitle = css`
+  width: 100%;
+  padding: 5px 12px;
+  border-radius: 6px;
+  border: 1px solid ${color['gray-color-light-X6']};
+
+  color: ${color['gray-color-light-X5']};
+
+  background-color: ${color['black-color']};
+  transition: all 0.2s linear;
+  outline: none;
+  &::placeholder {
+    color: ${color['gray-color-light-X6']};
+  }
+  &:focus {
+    border-color: ${color['blue-color-light']};
+
+    background-color: ${color['gray-color']};
+  }
 `;
