@@ -47,6 +47,7 @@ module.exports = {
       },
     ],
     '@emotion/jsx-import': 0,
+    'jsx-a11y/no-autofocus': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/label-has-associated-control': 0,
     'jsx-a11y/control-has-associated-label': 0,

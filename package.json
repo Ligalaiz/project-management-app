@@ -99,6 +99,7 @@
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^10.0.1",
     "jest": "^28.1.0",
+    "jest-environment-jsdom": "^28.1.0",
     "jest-localstorage-mock": "^2.4.17",
     "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^2.4.3",
