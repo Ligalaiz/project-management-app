@@ -13,11 +13,12 @@ export const task = css`
   border: 1px solid ${color['gray-color-light-X1']};
 
   background-color: ${color['gray-color-light']};
-  cursor: move;
+  cursor: grab;
   z-index: 10000;
 `;
 
 export const taskMenu = css`
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
