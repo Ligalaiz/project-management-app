@@ -9,3 +9,10 @@ export const board = css`
   overflow-x: scroll;
   overflow-y: hidden;
 `;
+
+export const boardWrap = css`
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 15px;
+`;
