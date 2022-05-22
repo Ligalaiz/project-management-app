@@ -9,9 +9,7 @@ const root = createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
   <Router>
-    <div className="container">
-      <Global styles={globalStyle} />
-      <App />
-    </div>
+    <Global styles={globalStyle} />
+    <App />
   </Router>,
 );
