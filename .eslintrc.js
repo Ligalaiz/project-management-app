@@ -47,6 +47,7 @@ module.exports = {
       },
     ],
     '@emotion/jsx-import': 0,
+    'jsx-a11y/no-autofocus': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
     'jsx-a11y/label-has-associated-control': 0,
     'jsx-a11y/control-has-associated-label': 0,
@@ -57,7 +58,6 @@ module.exports = {
       'warn',
       {
         groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-        'newlines-between': 'always-and-inside-groups',
       },
     ],
     'import/no-mutable-exports': 0,
@@ -71,13 +71,6 @@ module.exports = {
     'no-use-before-define': 'off',
     'no-param-reassign': 'off',
     'no-shadow': 'off',
-    'no-restricted-syntax': [
-      'error',
-      {
-        selector: 'ExportDefaultDeclaration',
-        message: 'Restricted default export, prefer named exports!',
-      },
-    ],
     camelcase: 'off',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/no-empty-function': 'off',
