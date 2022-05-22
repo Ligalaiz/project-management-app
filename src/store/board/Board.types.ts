@@ -1,8 +1,5 @@
-export interface IColumsPosition {
-  width: number;
-  heigth: number;
-  [key: string]: number;
-}
+import { MutableRefObject, MouseEvent } from 'react';
+import { textMap } from '@src/components/Modal/Modal.map';
 
 export interface IBoardPosition {
   bottom: number;
@@ -24,38 +21,53 @@ export interface ITask {
 
 export interface ITaskItem {
   task: ITask;
+  column: IColumns;
 }
 
 export interface IGetColumn {
   target: number;
-  columns: IColumns[];
-  boardPosition: IBoardPosition;
+  columnsPosition: IColumnPosition[];
+}
+
+export interface IPosition {
+  bottom: number | null;
+  height: number | null;
+  left: number | null;
+  right: number | null;
+  top: number | null;
+  width: number | null;
+  x: number | null;
+  y: number | null;
+  [key: string]: any;
 }
 
 export interface IColumns {
   id: number;
   title: string;
+  content: string;
   type: string;
-  [key: string]: string | number;
+  items: ITask[];
+  [key: string]: string | number | ITask[] | IPosition;
 }
 
 export interface IReorder {
-  type: string;
+  id: number;
   tasks: ITask[];
 }
-export interface IInitialBoardState {
-  columsPosition: IColumsPosition[];
-  columns: IColumns[];
-  tasks: {
-    [key: string]: ITask[];
-  };
-  boardPosition: IBoardPosition | null;
-  dragStartPosition: string | null;
-  error: { message: string } | null;
+
+export interface IColumnPosition {
+  id: number;
+  position: IPosition;
 }
 
-export interface SetPositionColumnsAction {
-  columsPosition: IColumsPosition;
+export interface IInitialBoardState {
+  columnsPosition: IColumnPosition[];
+  columns: IColumns[];
+  tasksCount: number;
+  columnCount: number;
+  boardPosition: IBoardPosition | null;
+  targetColumn: number | null;
+  error: { message: string } | null;
 }
 
 export interface SetBoardPositionAction {
@@ -64,4 +76,64 @@ export interface SetBoardPositionAction {
 
 export interface SetErrorAction {
   error: { message: string } | null;
+}
+
+export interface IColumnRef {
+  [key: string]: HTMLDivElement;
+}
+
+export interface IPositionArr {
+  columns: IColumns[];
+  columnsRef: MutableRefObject<IColumnRef>;
+}
+
+export interface IButton {
+  type?: string;
+  title?: string;
+  dataType?: string;
+  handleClick?: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+}
+
+export interface IDefaultColumns {
+  column: IColumns;
+  handleDrag: () => void;
+  [key: string]: any;
+}
+
+export interface IModal {
+  title?: string;
+  column?: IColumns;
+  task?: ITask;
+  type: keyof typeof textMap;
+  handleClose: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+}
+
+export interface ISubmenu {
+  target: string;
+  handleClose: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+}
+
+export interface IHandleDragEnd {
+  point: { x: number; y: number };
+}
+
+export interface IRemoveTask {
+  taskId: number;
+  columnId: number;
+}
+
+export interface ISetTask {
+  task: ITask;
+  targetColumn: number;
+}
+
+export interface IEditColumn {
+  columnId: number;
+  columnEdit: { title: string; type: string };
+}
+
+export interface IEditTask {
+  targetTask: number;
+  targetColumn: number;
+  task: { title: string; content: string };
 }
