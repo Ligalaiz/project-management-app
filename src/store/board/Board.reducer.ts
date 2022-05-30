@@ -11,83 +11,172 @@ import {
   IRemoveTask,
   IEditColumn,
   IEditTask,
+  IBoard,
+  IEditBoard,
 } from './Board.types';
 
 const boardReducer = {
   setPositionColumns: (state: IInitialBoardState, action: PayloadAction<IColumnPosition[]>) => {
-    state.columnsPosition = [...action.payload];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columnsPosition = [...action.payload];
+      }
+    });
   },
 
   setPositionBoard: (state: IInitialBoardState, action: PayloadAction<SetBoardPositionAction>) => {
-    state.boardPosition = action.payload.boardPosition;
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.boardPosition = action.payload.boardPosition;
+      }
+    });
   },
 
   reorderColumns: (state: IInitialBoardState, action: PayloadAction<IColumns[]>) => {
-    state.columns = [...action.payload];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columns = [...action.payload];
+      }
+    });
   },
 
   reorderTasks: (state: IInitialBoardState, action: PayloadAction<IReorder>) => {
     const { tasks, id } = action.payload;
-    const ind = state.columns.findIndex((item) => item.id === id);
 
-    state.columns[ind].items = [...tasks];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        const ind = item.columns.findIndex((column) => column.id === id);
+        item.columns[ind].items = [...tasks];
+      }
+    });
   },
 
   removeColumn: (state: IInitialBoardState, action: PayloadAction<number>) => {
-    state.columns = [...state.columns.filter((column) => column.id !== action.payload)];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columns = [...item.columns.filter((column) => column.id !== action.payload)];
+      }
+    });
   },
 
   editColumn: (state: IInitialBoardState, action: PayloadAction<IEditColumn>) => {
     const { columnEdit, columnId } = action.payload;
 
-    state.columns = [
-      ...state.columns.map((column) => {
-        if (column.id === columnId) {
-          return { ...column, ...columnEdit };
-        }
-        return column;
-      }),
-    ];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columns = [
+          ...item.columns.map((column) => {
+            if (column.id === columnId) {
+              return { ...column, ...columnEdit };
+            }
+            return column;
+          }),
+        ];
+      }
+    });
   },
 
   removeTask: (state: IInitialBoardState, action: PayloadAction<IRemoveTask>) => {
     const { taskId, columnId } = action.payload;
-    const ind = state.columns.findIndex((item) => item.id === columnId);
 
-    state.columns[ind].items = [...state.columns[ind].items.filter((item) => item.id !== taskId)];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        const ind = item.columns.findIndex((column) => column.id === columnId);
+
+        item.columns[ind].items = [...item.columns[ind].items.filter((column) => column.id !== taskId)];
+      }
+    });
   },
 
   setTask: (state: IInitialBoardState, action: PayloadAction<ISetTask>) => {
     const { task, targetColumn } = action.payload;
-    const ind = state.columns.findIndex((item) => item.id === targetColumn);
 
-    state.columns[ind].items = [{ ...task, type: state.columns[ind].type }, ...state.columns[ind].items];
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        const ind = item.columns.findIndex((column) => column.id === targetColumn);
+        item.columns[ind].items = [{ ...task, type: item.columns[ind].type }, ...item.columns[ind].items];
+      }
+    });
   },
 
   editTask: (state: IInitialBoardState, action: PayloadAction<IEditTask>) => {
     const { task, targetTask, targetColumn } = action.payload;
-    const ind = state.columns.findIndex((item) => item.id === targetColumn);
 
-    state.columns[ind].items = [
-      ...state.columns[ind].items.map((item) => {
-        if (item.id === targetTask) {
-          return { ...item, ...task };
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        const ind = item.columns.findIndex((column) => column.id === targetColumn);
+
+        item.columns[ind].items = [
+          ...item.columns[ind].items.map((curTask) => {
+            if (curTask.id === targetTask) {
+              return { ...curTask, ...task };
+            }
+            return curTask;
+          }),
+        ];
+      }
+    });
+  },
+
+  setTaskCount: (state: IInitialBoardState, action: PayloadAction<number>) => {
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.tasksCount = action.payload;
+      }
+    });
+  },
+
+  setColumnCount: (state: IInitialBoardState, action: PayloadAction<number>) => {
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columnCount = action.payload;
+      }
+    });
+  },
+
+  setColumn: (state: IInitialBoardState, action: PayloadAction<IColumns>) => {
+    state.boards.forEach((item) => {
+      if (item.id === state.boardId) {
+        item.columns = [...item.columns, action.payload];
+      }
+    });
+  },
+
+  createBoard: (state: IInitialBoardState, action: PayloadAction<IBoard>) => {
+    state.boards = [action.payload, ...state.boards];
+  },
+
+  setBoard: (state: IInitialBoardState, action: PayloadAction<number>) => {
+    state.boardId = action.payload;
+  },
+
+  delBoard: (state: IInitialBoardState, action: PayloadAction<number>) => {
+    state.boards = [...state.boards.filter((board) => board.id !== action.payload)];
+  },
+
+  editBoard: (state: IInitialBoardState, action: PayloadAction<IEditBoard>) => {
+    const { id, ...board } = action.payload;
+
+    state.boards = [
+      ...state.boards.map((item) => {
+        if (item.id === id) {
+          return { ...item, ...board };
         }
         return item;
       }),
     ];
   },
 
-  setTaskCount: (state: IInitialBoardState, action: PayloadAction<number>) => {
-    state.tasksCount = action.payload;
+  setFilter: (state: IInitialBoardState, action: PayloadAction<boolean>) => {
+    state.filter = action.payload;
   },
 
-  setColumnCount: (state: IInitialBoardState, action: PayloadAction<number>) => {
-    state.columnCount = action.payload;
+  setSearch: (state: IInitialBoardState, action: PayloadAction<string>) => {
+    state.searchQuery = action.payload;
   },
 
-  setColumn: (state: IInitialBoardState, action: PayloadAction<IColumns>) => {
-    state.columns = [...state.columns, action.payload];
+  setSortType: (state: IInitialBoardState, action: PayloadAction<string>) => {
+    state.sortType = action.payload;
   },
 
   setError: (state: IInitialBoardState, action: PayloadAction<SetErrorAction>) => {

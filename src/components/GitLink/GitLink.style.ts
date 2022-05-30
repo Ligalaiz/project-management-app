@@ -8,6 +8,8 @@ export const githubCorner = css`
   width: 100px;
   height: 100px;
 
+  z-index: 1001;
+
   &:hover .octo-arm {
     animation: octocat-wave 560ms ease-in-out;
   }

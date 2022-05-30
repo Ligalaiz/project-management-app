@@ -3,6 +3,7 @@ import { Route, Routes, useParams } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { Layout } from '@src/screens/Layout';
 
+const Main = lazy(() => import('@src/components/Main'));
 const Board = lazy(() => import('@src/components/Board'));
 const NotFoundPage = lazy(() => import('@src/components/NotFoundPage'));
 
@@ -13,11 +14,19 @@ const AppRouter: FC = () => {
   return (
     <TransitionGroup>
       <Routes>
-        <Route path="/board" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route
             index
             element={
-              <Suspense fallback={<h2>Loading...</h2>}>
+              <Suspense fallback={<h2 style={{ flex: '1 0 auto' }}>Loading...</h2>}>
+                <Main />
+              </Suspense>
+            }
+          />
+          <Route
+            path="board/:id"
+            element={
+              <Suspense fallback={<h2 style={{ flex: '1 0 auto' }}>Loading...</h2>}>
                 <Board />
               </Suspense>
             }
@@ -26,7 +35,7 @@ const AppRouter: FC = () => {
             path="*"
             element={
               <CSSTransition in={match != null} timeout={1000} key={id} classNames="page">
-                <Suspense fallback={<h2>Loading...</h2>}>
+                <Suspense fallback={<h2 style={{ flex: '1 0 auto' }}>Loading...</h2>}>
                   <NotFoundPage />
                 </Suspense>
               </CSSTransition>

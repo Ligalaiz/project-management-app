@@ -16,3 +16,7 @@ export const boardWrap = css`
   margin: 0 auto;
   padding: 0 15px;
 `;
+
+export const boardMain = css`
+  flex: 1 0 auto;
+`;

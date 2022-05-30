@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
 import { color } from '@src/styles';
+import open from '@assets/img/open.svg';
+import close from '@assets/img/close.svg';
 
 export const btn = css`
   min-width: 131px;
@@ -14,6 +16,7 @@ export const btn = css`
   background-color: ${color['gray-color-light-X8']};
   cursor: pointer;
   transition: all 0.2s linear;
+
   &:hover {
     background-color: ${color['gray-color-light-X1']};
     border-color: ${color['gray-color-light-X2']};
@@ -27,6 +30,7 @@ export const addAction = css`
   color: white;
 
   background-color: ${color['green-color']};
+
   &:hover {
     background-color: ${color['green-color-X1']};
   }
@@ -36,6 +40,7 @@ export const deleteAction = css`
   ${btn}
 
   color: ${color['red-color']};
+
   &:hover {
     color: white;
 
@@ -56,6 +61,7 @@ export const closeAction = css`
 
   background: transparent;
   cursor: pointer;
+
   &:before {
     content: '+';
     top: 50%;
@@ -70,6 +76,7 @@ export const closeAction = css`
     transform: translateY(-50%) rotate(45deg);
     transition: all 0.2s linear;
   }
+
   &:hover:before {
     color: ${color['blue-color-light']};
   }
@@ -77,6 +84,7 @@ export const closeAction = css`
 
 export const submenuAction = css`
   ${btn}
+
   position: realtive;
 
   border-radius: unset;
@@ -90,10 +98,69 @@ export const submenuAction = css`
 
   background-color: ${color['gray-color-light']};
   z-index: 2;
+
   &:hover {
     color: white;
 
     background-color: ${color['blue-color']};
     border-color: ${color['blue-color']};
+  }
+`;
+
+export const submenuSort = css`
+  ${submenuAction}
+
+  position: relative;
+
+  padding: 4px 8px 4px 26px;
+
+  line-height: 2.1rem;
+`;
+
+const commonCount = css`
+  position: relative;
+
+  padding-left: 22px;
+  border: none;
+
+  color: ${color['gray-color-light-X2']};
+  font-weight: 600;
+
+  background-color: transparent;
+
+  transition: all 0.2s linear;
+  cursor: pointer;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+
+    width: 16px;
+    height: 16px;
+
+    background-repeat: no-repeat;
+    transform: translateY(-50%);
+  }
+
+  &:hover {
+    color: ${color['gray-color-light-X5']};
+  }
+`;
+
+export const openCount = css`
+  ${commonCount}
+
+  &:before {
+    background-image: url(${open});
+  }
+`;
+
+export const closeCount = css`
+  ${commonCount}
+
+  &:before {
+    background-image: url(${close});
   }
 `;
