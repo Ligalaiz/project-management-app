@@ -1,18 +1,18 @@
 import React, { ChangeEvent, useState, MouseEvent } from 'react';
 import { Reorder, useDragControls } from 'framer-motion';
-import { color } from '@src/styles';
-import { Tasks } from '@components/Tasks';
 import { IDefaultColumns } from '@src/store/board/Board.types';
-import { Modal } from '@components/Modal';
-import { Submenu } from '@components/Submenu';
 import { useAction } from '@src/hooks/useAction';
+import { Submenu } from '@components/Submenu';
+import { Modal } from '@components/Modal';
+import { Tasks } from '@components/Tasks';
+import { color } from '@src/styles';
 import * as c from './Column.style';
 
 const Column = React.forwardRef((props: IDefaultColumns, ref) => {
-  const { column, handleDrag } = props;
+  const { column, handleDrag, board } = props;
   const { editColumn } = useAction();
-  const [isModal, SetIstModal] = useState(false);
-  const [isSubmenu, SetIsSubmenu] = useState(false);
+  const [isModal, setIstModal] = useState(false);
+  const [isSubmenu, setIsSubmenu] = useState(false);
   const [isTitle, setIsTitle] = useState(false);
   const [modalType, setModalType] = useState('');
   const [titleValue, setTitleValue] = useState(column!.title || '');
@@ -20,6 +20,7 @@ const Column = React.forwardRef((props: IDefaultColumns, ref) => {
 
   const handleCloseModal = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     handleCloseSubmenu(e);
+
     const {
       dataset: { type },
     } = e.target as typeof e.target & {
@@ -29,16 +30,18 @@ const Column = React.forwardRef((props: IDefaultColumns, ref) => {
     };
 
     if (type === 'close') {
-      SetIstModal(!isModal);
       setModalType('atask');
+      setIstModal(!isModal);
     }
+
     if (type === 'columnEdit') {
-      SetIstModal(true);
       setModalType('ecolumn');
+      setIstModal(true);
     }
+
     if (type === 'columnDelete') {
-      SetIstModal(true);
       setModalType('dcolumn');
+      setIstModal(true);
     }
   };
 
@@ -52,15 +55,13 @@ const Column = React.forwardRef((props: IDefaultColumns, ref) => {
     };
 
     if (type === 'submenu') {
-      SetIsSubmenu(!isSubmenu);
+      setIsSubmenu(!isSubmenu);
     } else {
-      SetIsSubmenu(false);
+      setIsSubmenu(false);
     }
   };
 
-  const handleClickTitle = () => {
-    setIsTitle(true);
-  };
+  const handleClickTitle = () => setIsTitle(true);
 
   const handleBlur = () => {
     if (titleValue?.length > 3 && column) {
@@ -68,8 +69,10 @@ const Column = React.forwardRef((props: IDefaultColumns, ref) => {
         title: titleValue,
         type: titleValue,
       };
+
       editColumn({ columnEdit, columnId: column.id });
     }
+
     setIsTitle(false);
   };
 
@@ -118,7 +121,7 @@ const Column = React.forwardRef((props: IDefaultColumns, ref) => {
           <Tasks column={column} />
         </div>
       </Reorder.Item>
-      {isModal && <Modal type={modalType} handleClose={handleCloseModal} column={column} />}
+      {isModal && <Modal board={board} type={modalType} handleClose={handleCloseModal} column={column} />}
     </>
   );
 });
