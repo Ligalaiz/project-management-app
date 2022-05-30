@@ -19,7 +19,7 @@ export const modalWrap = css`
 export const modal = css`
   max-width: 600px;
   min-width: 446px;
-  border: 1px solid ${color['ray-color-light-X1']};
+  border: 1px solid ${color['gray-color-light-X1']};
   border-radius: 6px;
 `;
 
@@ -66,12 +66,15 @@ const field = css`
   border: 1px solid ${color['gray-color-light-X6']};
 
   color: ${color['gray-color-light-X5']};
+
   background-color: ${color['black-color']};
   transition: all 0.2s linear;
   outline: none;
+
   &::placeholder {
     color: ${color['gray-color-light-X6']};
   }
+
   &:focus {
     border-color: ${color['blue-color-light']};
 
@@ -81,6 +84,7 @@ const field = css`
 
 export const taskField = css`
   ${field}
+
   max-height: 400px;
 
   resize: vertical;
@@ -92,5 +96,25 @@ export const columnTitle = css`
 
 export const taskTitle = css`
   ${field}
+
   margin-bottom: 1rem;
+`;
+
+export const delBoardWrap = css`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 2rem;
+`;
+
+export const delTitle = css`
+  font-size: 15px;
+  font-weight: 600;
+`;
+
+export const delText = css`
+  margin-bottom: 1rem;
+
+  font-size: 14px;
+  color: ${color['gray-color-light-X2']};
 `;

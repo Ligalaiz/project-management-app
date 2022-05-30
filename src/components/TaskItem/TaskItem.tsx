@@ -1,12 +1,12 @@
 import React, { MouseEvent, FC, useRef, useState } from 'react';
 import { Reorder } from 'framer-motion';
-import { color } from '@src/styles';
 import { ITaskItem, IHandleDragEnd } from '@src/store/board/Board.types';
+import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
 import { useAction } from '@src/hooks/useAction';
 import { getColumn } from '@src/utils';
 import { Submenu } from '@components/Submenu';
-import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
 import { Modal } from '@components/Modal';
+import { color } from '@src/styles';
 import * as t from './TaskItem.style';
 
 const variants = {
@@ -16,12 +16,18 @@ const variants = {
 };
 
 const TaskItem: FC<ITaskItem> = ({ task, column }) => {
-  const { boardPosition, columnsPosition } = useTypedUseSelector((state) => state.board);
+  const { boards, boardId } = useTypedUseSelector((state) => state.board);
   const { removeTask, setTask } = useAction();
   const [isSubmenu, SetIsSubmenu] = useState(false);
   const [isModal, SetIsModal] = useState(false);
   const [modalType, setModalType] = useState('');
   const ref = useRef<HTMLDivElement>(null);
+
+  const board = boards.find((item) => item.id === boardId);
+  if (!board) return null;
+
+  const boardPosition = board?.boardPosition;
+  const columnsPosition = board?.columnsPosition;
 
   const handleCloseSubmenu = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const {
@@ -41,6 +47,7 @@ const TaskItem: FC<ITaskItem> = ({ task, column }) => {
 
   const handleCloseModal = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     handleCloseSubmenu(e);
+
     const {
       dataset: { type },
     } = e.target as typeof e.target & {
@@ -52,13 +59,15 @@ const TaskItem: FC<ITaskItem> = ({ task, column }) => {
     if (type === 'close') {
       SetIsModal(!isModal);
     }
+
     if (type === 'taskEdit') {
-      SetIsModal(true);
       setModalType('etask');
-    }
-    if (type === 'taskDelete') {
       SetIsModal(true);
+    }
+
+    if (type === 'taskDelete') {
       setModalType('dtask');
+      SetIsModal(true);
     }
   };
 
@@ -110,7 +119,7 @@ const TaskItem: FC<ITaskItem> = ({ task, column }) => {
           </a>
         </div>
       </Reorder.Item>
-      {isModal && <Modal type={modalType} handleClose={handleCloseModal} column={column} task={task} />}
+      {isModal && <Modal board={board} type={modalType} handleClose={handleCloseModal} column={column} task={task} />}
     </>
   );
 };

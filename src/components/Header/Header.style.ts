@@ -1,18 +1,29 @@
 import { css } from '@emotion/react';
-
 import { color } from '@src/styles';
 
 export const header = css`
-  display: flex;
-  flex-direction: column;
-  padding-top: 0.5rem;
+  position: sticky;
+  top: 0;
+
   margin-bottom: 2rem;
 
-  gap: 0.2rem;
+  background-color: ${color['gray-color-light']};
+  z-index: 1000;
+`;
+
+export const headerWrap = css`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const logo = css`
+  background: red;
 `;
 
 export const nav = css`
   display: flex;
+  align-items: center;
 `;
 
 export const navLink = css`
@@ -26,10 +37,16 @@ export const navLink = css`
   transition: all 0.2s linear;
 
   &:hover {
-    background-color: ${color['gray-color-light']};
+    color: ${color['gray-color-light-X10']};
   }
+
+  &:hover .octicon .logo {
+    fill: ${color['gray-color-light-X10']};
+    transition: all 0.2s linear;
+  }
+
   &.active {
-    background-color: ${color['gray-color-light']};
+    color: ${color['gray-color-light-X10']};
   }
 `;
 
@@ -60,4 +77,11 @@ export const showPath = css`
   ${path}
 
   visibility: visible
+`;
+
+export const btnWrap = css`
+  display: flex;
+  align-items: center;
+  max-height: 31px;
+  gap: 0.5rem;
 `;

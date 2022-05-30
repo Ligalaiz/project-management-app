@@ -13,6 +13,11 @@ export const wrap = css`
 
   background-color: ${color['gray-color-light']};
   z-index: 10;
+`;
+
+export const wrapBoard = css`
+  ${wrap}
+
   &:before {
     content: '';
     position: absolute;
@@ -32,15 +37,36 @@ export const wrap = css`
 `;
 
 export const wrapColumn = css`
-  ${wrap}
+  ${wrapBoard}
 
   top: 30px;
   right: 3px;
 `;
 
 export const wrapTask = css`
-  ${wrap}
+  ${wrapBoard}
 
   top: 23px;
   right: -5px;
+`;
+
+export const wrapProject = css`
+  ${wrapBoard}
+
+  top: 40px;
+  right: 9px;
+`;
+
+export const wrapTable = css`
+  ${wrap}
+
+  left: -172px;
+  top: 25px;
+
+  min-width: 230px;
+  border-bottom: 1px solid ${color['gray-color-light-X8']};
+`;
+
+export const titleSbmenu = css`
+  padding: 0 10px;
 `;

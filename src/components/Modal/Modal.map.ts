@@ -1,6 +1,7 @@
 interface IContent {
   title: string;
   btn: { type: string; title: string };
+  btnDel?: { type: string; title: string };
 }
 
 interface ITextMap {
@@ -8,6 +9,7 @@ interface ITextMap {
   dtask: IContent;
   acolumn: IContent;
   dcolumn: IContent;
+  сboard: IContent;
   [key: string]: IContent;
 }
 
@@ -52,6 +54,24 @@ const textMap: ITextMap = {
     btn: {
       type: 'create',
       title: 'Edit column',
+    },
+  },
+  eboard: {
+    title: 'Edit project',
+    btn: {
+      type: 'create',
+      title: 'Save project',
+    },
+    btnDel: {
+      type: 'delete',
+      title: 'Delete project',
+    },
+  },
+  сboard: {
+    title: 'Create a new project',
+    btn: {
+      type: 'create',
+      title: 'Create project',
     },
   },
 };
