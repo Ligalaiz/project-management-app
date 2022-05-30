@@ -60,13 +60,37 @@ export interface IColumnPosition {
   position: IPosition;
 }
 
-export interface IInitialBoardState {
+export interface IBoard {
+  id: number;
+  creator: string;
+  title: string;
+  description: string;
+  status: boolean;
   columnsPosition: IColumnPosition[];
   columns: IColumns[];
   tasksCount: number;
   columnCount: number;
   boardPosition: IBoardPosition | null;
   targetColumn: number | null;
+  createDate: number;
+  updated: number;
+}
+
+export interface IEditBoard {
+  id: number;
+  title?: string;
+  description?: string;
+  status?: boolean;
+  createDate?: number;
+  updated?: number;
+}
+
+export interface IInitialBoardState {
+  boards: IBoard[];
+  boardId: number | null;
+  filter: boolean;
+  sortType: string;
+  searchQuery: string;
   error: { message: string } | null;
 }
 
@@ -91,11 +115,13 @@ export interface IButton {
   type?: string;
   title?: string;
   dataType?: string;
+  dataName?: string;
   handleClick?: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
 
 export interface IDefaultColumns {
   column: IColumns;
+  board: IBoard;
   handleDrag: () => void;
   [key: string]: any;
 }
@@ -104,6 +130,7 @@ export interface IModal {
   title?: string;
   column?: IColumns;
   task?: ITask;
+  board?: IBoard | null;
   type: keyof typeof textMap;
   handleClose: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
@@ -136,4 +163,20 @@ export interface IEditTask {
   targetTask: number;
   targetColumn: number;
   task: { title: string; content: string };
+}
+
+export interface IInput {
+  type: string;
+  testId: string;
+  placeholder?: string;
+  name?: 'switcher';
+  children?: string;
+}
+
+export interface IHandlersMap {
+  [key: string]: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+}
+
+export interface ITasks {
+  column: IColumns;
 }

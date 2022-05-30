@@ -19,6 +19,7 @@ export const task = css`
 
 export const taskMenu = css`
   position: relative;
+
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
@@ -65,6 +66,7 @@ export const executor = css`
   color: ${color['gray-color-light-X5']};
 
   transition: all 0.2s linear;
+
   &:hover {
     text-decoration: underline;
   }

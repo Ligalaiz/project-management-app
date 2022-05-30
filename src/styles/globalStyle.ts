@@ -1,9 +1,8 @@
 import { css } from '@emotion/react';
-
 import helveticaRegular from '@assets/fonts/helvetica-regular.woff2';
 import helveticaMedium from '@assets/fonts/helvetica-medium.woff2';
 import helveticaBold from '@assets/fonts/helvetica-bold.woff2';
-
+import yes from '@assets/img/yes.svg';
 import { color } from './variables';
 
 export const globalStyle = css`
@@ -31,6 +30,7 @@ export const globalStyle = css`
     overflow: -moz-scrollbars-vertical;
     overflow-y: scroll;
     overflow-x: hidden;
+    height: 100%;
   }
 
   * {
@@ -88,6 +88,7 @@ export const globalStyle = css`
 
     margin: 0;
     padding: 0;
+    height: 100%;
 
     font-family: 'Segoe UI', 'Helvetica', 'Arial', sans-serif;
     font-weight: 400;
@@ -112,22 +113,26 @@ export const globalStyle = css`
 
   .visually-hidden {
     position: absolute;
+
     width: 1px;
     height: 1px;
     margin: -1px;
     padding: 0;
-    overflow: hidden;
     border: 0;
+
+    overflow: hidden;
     clip: rect(0 0 0 0);
   }
 
   .visually-hidden:not(:focus):not(:active) {
     position: absolute;
+
     width: 1px;
     height: 1px;
     margin: -1px;
-    border: 0;
     padding: 0;
+    border: 0;
+
     white-space: nowrap;
     clip-path: inset(100%);
     clip: rect(0 0 0 0);
@@ -142,7 +147,10 @@ export const globalStyle = css`
   }
 
   .wrapper {
+    display: flex;
+    flex-direction: column;
     min-width: 320px;
+    height: 100%;
   }
 
   ::-webkit-scrollbar {
@@ -150,8 +158,40 @@ export const globalStyle = css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${color['blue-color']};
-    background-clip: padding-box;
     border-radius: 5px;
+
+    background: ${color['gray-color']};
+    background-clip: padding-box;
+  }
+
+  #root {
+    height: 100%;
+    & > div {
+      height: 100%;
+    }
+  }
+
+  .logo {
+    fill: ${color['white-color']};
+  }
+
+  .sortActive {
+    &:before {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 50%;
+
+      width: 16px;
+      height: 16px;
+
+      background-image: url(${yes});
+      background-repeat: no-repeat;
+      transform: translateY(-50%);
+    }
+  }
+
+  .projectFilterActive {
+    color: ${color['gray-color-light-X5']} !important;
   }
 `;

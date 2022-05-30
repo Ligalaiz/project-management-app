@@ -104,8 +104,10 @@ export const addBtn = css`
     transition: all 0.2s linear;
     background-color: ${color['gray-color-light-X4']};
   }
+
   &:hover {
     color: ${color['blue-color-light']};
+
     &:before,
     &:after {
       visibility: visible;
@@ -140,9 +142,11 @@ export const columnTitle = css`
   background-color: ${color['black-color']};
   transition: all 0.2s linear;
   outline: none;
+
   &::placeholder {
     color: ${color['gray-color-light-X6']};
   }
+
   &:focus {
     border-color: ${color['blue-color-light']};
 

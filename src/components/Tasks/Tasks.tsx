@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Reorder, AnimatePresence } from 'framer-motion';
 import { TaskItem } from '@components/TaskItem';
 import { useAction } from '@src/hooks/useAction';
-import { IColumns, ITask } from '@src/store/board/Board.types';
+import { ITask, ITasks } from '@src/store/board/Board.types';
 import * as t from './Tasks.style';
 
-const Tasks = ({ column }: { column: IColumns }) => {
+const Tasks: FC<ITasks> = ({ column }) => {
   const { reorderTasks } = useAction();
 
   return (
