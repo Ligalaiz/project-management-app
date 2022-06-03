@@ -74,6 +74,13 @@ const textMap: ITextMap = {
       title: 'Create project',
     },
   },
+  duser: {
+    title: 'Delete current user form App',
+    btn: {
+      type: 'delete',
+      title: 'Delete user',
+    },
+  },
 };
 
 export { textMap };

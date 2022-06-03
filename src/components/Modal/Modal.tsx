@@ -1,8 +1,10 @@
 import React, { FC, MouseEvent, useState, ChangeEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAction } from '@src/hooks/useAction';
 import { IModal, IBoard, IHandlersMap } from '@src/store/board/Board.types';
 import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
 import { Button } from '@components/Button';
+import { delUser } from '@utils/auth.utils';
 import { textMap } from './Modal.map';
 import * as m from './Modal.style';
 
@@ -19,6 +21,7 @@ const Modal: FC<IModal> = ({ title, type, handleClose, column, task, board }) =>
     delBoard,
     editBoard,
     createBoard,
+    removeUser,
   } = useAction();
   const { boards } = useTypedUseSelector((state) => state.board);
   const [columnField, setColumnField] = useState(type === 'ecolumn' ? column!.title : '');
@@ -27,6 +30,7 @@ const Modal: FC<IModal> = ({ title, type, handleClose, column, task, board }) =>
   const [boardTitle, setBoardTitle] = useState(type === 'eboard' ? board!.title : '');
   const [boardDesc, setBoardDesc] = useState(type === 'eboard' ? board!.description : '');
   const config = textMap[type];
+  const navigate = useNavigate();
 
   const handleAddColumn = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     e.stopPropagation();
@@ -110,6 +114,12 @@ const Modal: FC<IModal> = ({ title, type, handleClose, column, task, board }) =>
       setTaskCount(board.tasksCount - 1);
       editBoard({ id: board.id, updated: Date.now() });
     }
+  };
+
+  const handleDelUser = () => {
+    delUser();
+    removeUser();
+    navigate('/main');
   };
 
   const handleEditBoard = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
@@ -232,6 +242,7 @@ const Modal: FC<IModal> = ({ title, type, handleClose, column, task, board }) =>
     etask: handleEditTask,
     eboard: handleEditBoard,
     сboard: handleEditBoard,
+    duser: handleDelUser,
   };
 
   return (
@@ -250,6 +261,7 @@ const Modal: FC<IModal> = ({ title, type, handleClose, column, task, board }) =>
             {(type === 'acolumn' || type === 'ecolumn') && columnView}
             {type === 'dcolumn' && <p>This action will remove any cards associated with the column.</p>}
             {type === 'dtask' && <p>This will remove this note from the project.</p>}
+            {type === 'duser' && <p>This will remove user from App.</p>}
           </div>
           <div css={m.btnWrap}>
             <Button

@@ -5,8 +5,6 @@ export const header = css`
   position: sticky;
   top: 0;
 
-  margin-bottom: 2rem;
-
   background-color: ${color['gray-color-light']};
   z-index: 1000;
 `;
