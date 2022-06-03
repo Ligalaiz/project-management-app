@@ -1,5 +1,7 @@
 import { MutableRefObject, MouseEvent } from 'react';
+import { UseFormRegister } from 'react-hook-form';
 import { textMap } from '@src/components/Modal/Modal.map';
+import { IForm, ILoginValues } from '@src/store/form/Form.types';
 
 export interface IBoardPosition {
   bottom: number;
@@ -116,6 +118,8 @@ export interface IButton {
   title?: string;
   dataType?: string;
   dataName?: string;
+  disabled?: boolean;
+  testid?: string;
   handleClick?: (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
 }
 
@@ -169,8 +173,10 @@ export interface IInput {
   type: string;
   testId: string;
   placeholder?: string;
-  name?: 'switcher';
+  name?: 'name' | 'mail' | 'switcher' | 'password';
   children?: string;
+  errors?: any;
+  register?: UseFormRegister<IForm | ILoginValues>;
 }
 
 export interface IHandlersMap {
