@@ -21,6 +21,13 @@ export const btn = css`
     background-color: ${color['gray-color-light-X1']};
     border-color: ${color['gray-color-light-X2']};
   }
+
+  &:disabled {
+    border: 1px solid ${color['white-color-X1']};
+
+    background-color: ${color['gray-color-light-X8']};
+    cursor: default;
+  }
 `;
 
 export const addAction = css`
@@ -33,6 +40,20 @@ export const addAction = css`
 
   &:hover {
     background-color: ${color['green-color-X1']};
+  }
+`;
+
+export const start = css`
+  ${btn}
+  border: 1px solid ${color['white-color-X1']};
+  padding: 16px 25px;
+
+  color: white;
+
+  background-color: ${color['blue-color']};
+
+  &:hover {
+    background-color: ${color['blue-color-light']};
   }
 `;
 
