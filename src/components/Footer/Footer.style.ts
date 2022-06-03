@@ -3,7 +3,6 @@ import { color } from '@src/styles';
 
 export const footerWrap = css`
   flex: 0 0 auto;
-  margin-top: 2rem;
 
   background-color: ${color['gray-color-light']};
 `;
