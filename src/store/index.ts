@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import { BoardReducer } from './board';
+import { FormReducer } from './form';
 
 const store = configureStore({
-  reducer: { board: BoardReducer },
+  reducer: { board: BoardReducer, form: FormReducer },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
