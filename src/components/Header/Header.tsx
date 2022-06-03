@@ -1,14 +1,21 @@
 import React, { FC, useState, MouseEvent } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTransform, motion, useViewportScroll } from 'framer-motion';
+import { useAction } from '@src/hooks/useAction';
 import { Button } from '@components/Button';
 import { Modal } from '@components/Modal';
 import { Input } from '@components/Input';
+import { useTypedUseSelector } from '@src/hooks/useTypedUseSelector';
+import { logout } from '@utils/auth.utils';
 import * as h from './Header.style';
 
 const Header: FC = () => {
+  const { user } = useTypedUseSelector((state) => state.form);
+  const { logoutUser } = useAction();
   const [isModal, setIsModal] = useState(false);
+  const [isDelUser, setIsDelUser] = useState(false);
   const { search } = useLocation();
+  const navigate = useNavigate();
   const { scrollY } = useViewportScroll();
   const offsetY = [0, 150];
   const paddingTop = useTransform(scrollY, offsetY, [20, 0]);
@@ -16,16 +23,40 @@ const Header: FC = () => {
 
   const handleCloseModal = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
     const {
-      dataset: { type },
+      dataset: { type, name },
     } = e.target as typeof e.target & {
       dataset: {
         type: string;
+        name: string;
       };
     };
 
-    if (type === 'close') {
-      setIsModal(!isModal);
-    }
+    if (name === 'delUser') setIsDelUser(true);
+    if (name === 'cboard') setIsDelUser(false);
+    if (type === 'close') setIsModal(!isModal);
+  };
+
+  const handleLogout = () => {
+    logout();
+    logoutUser();
+    navigate('/welcome');
+  };
+
+  const handleEditProfile = () => {
+    navigate('/edit');
+  };
+
+  const handleAuth = (e: MouseEvent<HTMLDivElement | HTMLButtonElement>) => {
+    const {
+      dataset: { name },
+    } = e.target as typeof e.target & {
+      dataset: {
+        name: string;
+      };
+    };
+
+    if (name === 'login') navigate('/login');
+    if (name === 'signup') navigate('/signup');
   };
 
   return (
@@ -63,15 +94,31 @@ const Header: FC = () => {
             </ul>
           </nav>
           <div css={h.btnWrap}>
-            <Button title="edit profile" />
-            <Button title="delete user" />
-            <Button title="logout" />
-            <Button title="New project" type="create" dataType="close" handleClick={handleCloseModal} />
+            {user && (
+              <>
+                <Button title="edit profile" handleClick={handleEditProfile} />
+                <Button title="delete user" dataType="close" dataName="delUser" handleClick={handleCloseModal} />
+                <Button title="logout" handleClick={handleLogout} />
+                <Button
+                  title="New project"
+                  type="create"
+                  dataType="close"
+                  dataName="cboard"
+                  handleClick={handleCloseModal}
+                />
+              </>
+            )}
+            {!user && (
+              <>
+                <Button title="Login" dataName="login" handleClick={handleAuth} />
+                <Button title="Signup" dataName="signup" handleClick={handleAuth} />
+              </>
+            )}
             <Input name="switcher" type="checkbox" testId="lang" />
           </div>
         </div>
       </motion.header>
-      {isModal && <Modal type="сboard" handleClose={handleCloseModal} />}
+      {isModal && <Modal type={isDelUser ? 'duser' : 'сboard'} handleClose={handleCloseModal} />}
     </>
   );
 };
