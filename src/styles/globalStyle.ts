@@ -77,6 +77,14 @@ export const globalStyle = css`
     max-width: 1024px;
     margin: 0 auto;
     padding: 0 15px;
+
+    @media (max-width: 990px) {
+      max-width: 720px;
+    }
+
+    @media (max-width: 768px) {
+      max-width: 540px;
+    }
   }
 
   input:focus {
