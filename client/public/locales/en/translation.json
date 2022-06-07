@@ -1,0 +1,106 @@
+{
+  "user": {
+    "edit_profile": "edit profile",
+    "edit_success": "Profile edit successful",
+    "del": "delete user",
+    "logout": "logout",
+    "login": "Login",
+    "reg": "Signup",
+    "not_exist": "User does not exist",
+    "exist": "User already exist",
+    "login_success": "Login successful",
+    "signup_success": "Signup successful",
+    "mail": "mail",
+    "password": "password",
+    "name": "name",
+    "edit": "edit"
+  },
+  "board": {
+    "close_message_title": "No closed projects",
+    "close_message_desc": "No projects have been closed yet. You can close projects from the projects list or a project’s menu.",
+    "open_message_title": "No open projects",
+    "open_message_desc": "There are no open projects. You can reopen projects from the projects list or a project’s menu."
+  },
+  "message": {
+    "save_data": "Data saved successfully"
+  },
+  "modal": {
+    "delete_column": "This action will remove any tasks associated with the column.",
+    "delete_task": "This will remove this task from the project.",
+    "delete_user": "This will remove user from App.",
+    "delete_board_part1": "This will remove this board",
+    "delete_board_part2": "from the task manager.",
+    "project_view_desc": "Description (optional)",
+    "project_view_title": "Enter a project board name",
+    "task_view_desc": "Description (optional)",
+    "task_view_title": "Enter a task name",
+    "column_view_title": "Enter a column name more 3 symbols (To Do, In Progress, Done)",
+    "column_name": "Column name"
+  },
+  "create_project": "New project",
+  "delete_project": "Delete project",
+  "back_to_main": "Back main",
+  "add_column": "Add Column",
+  "link": "Link",
+  "open": "Open",
+  "reopen": "Reopen",
+  "close": "Close",
+  "sort": "Sort",
+  "sort_by": "Sort by",
+  "cancel": "Cancel",
+  "project": "project",
+  "task": "task",
+  "delete": "Delete",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "updated": "Recently updated",
+  "last_updated": "Least recently updated",
+  "name": "Name",
+  "edit": "Edit",
+  "column": "column",
+  "atask": {
+    "title": "Add a task",
+    "btn": { "title": "Add" }
+  },
+  "dtask": {
+    "title": "Delete a task",
+    "btn": { "title": "Delete" }
+  },
+  "etask": {
+    "title": "Edit a task",
+    "btn": { "title": "Edit task" }
+  },
+  "acolumn": {
+    "title": "Add a column",
+    "btn": { "title": "Create column" }
+  },
+  "dcolumn": {
+    "title": "Delete column",
+    "btn": { "title": "Delete column" }
+  },
+  "ecolumn": {
+    "title": "Edit a column",
+    "btn": { "title": "Edit column" }
+  },
+  "eboard": {
+    "title": "Edit project",
+    "btn": { "title": "Save project" },
+    "btnDel": { "title": "Delete project" }
+  },
+  "сboard": {
+    "title": "Create a new project",
+    "btn": { "title": "Create project" }
+  },
+  "duser": {
+    "title": "Delete current user form App",
+    "btn": { "title": "Delete user" }
+  },
+  "search_placeholder": "Search all project",
+  "welcome": {
+    "title": "PMA helps teams move work forward.",
+    "subtitle": "Collaborate, manage projects, and reach new productivity peaks. From high rises to the home office, the way your team works is unique—accomplish it all with PMA.",
+    "preview_title": "It’s more than work. It’s a way of working together.",
+    "preview_subtitle": "Start with a PMA board, lists, and cards. Customize and expand with more features as your teamwork grows. Manage projects, organize tasks, and build team spirit—all in one place.",
+    "start": "Start doing"
+  }
+}
